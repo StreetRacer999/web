@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/machines', 'App\Http\Controllers\MachinesController@index');
+Route::post('/machines', 'App\Http\Controllers\MachinesController@create');

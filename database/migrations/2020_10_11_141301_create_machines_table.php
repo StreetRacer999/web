@@ -16,6 +16,7 @@ class CreateMachinesTable extends Migration
         Schema::create('machines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->constrained()->onDelete('cascade');
+            $table->string('parent');
             $table->string('name');
             $table->ipAddress('ip')->unique()->nullable();
             $table->string('token', 32)->unique();

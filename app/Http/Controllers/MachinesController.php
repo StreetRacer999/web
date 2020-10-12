@@ -4,9 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Http\Request;
+use App\models\Machine;
+
 
 class MachinesController extends Controller
 {
+    public function index(){
+        $machines = Machine::where('parent', \Auth::user()->id)->get();
+
+        $data = [
+            'title' => 'Наша компания',
+            'description' => 'Наша компания - самая лучшая в своём роде',
+            'machines' => $machines,
+        ];
+        return view('machines.index', $data);
+    }
+
+    public function create(Request $request){
+        $machines = new Machine;
+
+        $machines->name = $request->input('name');
+        $machines->ip = $request->input('ip');
+        $machines->status = 'installing';
+        $machines->parent = \Auth::user()->id;
+
+        $machines->save();
+    }
+
     public static function prepareInstall($machine)
     {
         $domain = $machine->id . '.machines.rustscp.net';

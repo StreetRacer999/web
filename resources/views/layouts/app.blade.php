@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.custom.css') }}">
 
         @livewireStyles
 
@@ -38,5 +39,7 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
+        <script src="{{ asset('js/app.custom.js') }}" defer></script>
     </body>
 </html>

@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Auditable;
 
-class Machine extends Model
+class Machine extends Model 
 {
-    use HasFactory, Auditable;
+    use HasFactory;
+
+    protected $fillabel = ['name', 'ip'];
 
     public function team()
     {

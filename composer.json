@@ -17,7 +17,8 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.0",
-        "owen-it/laravel-auditing": "^11.0"
+        "owen-it/laravel-auditing": "^11.0",
+        "santigarcor/laratrust": "^6.2"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
