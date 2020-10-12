@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Http\Request;
-use App\models\Machine;
+use App\Models\Machine;
 
 
 class MachinesController extends Controller
