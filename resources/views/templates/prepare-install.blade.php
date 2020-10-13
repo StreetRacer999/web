@@ -1,16 +1,11 @@
 #!/bin/bash
-fn_fetch_installer()
 
-fn_fetch_installer(){
-	fileurl="{{ $installer_url }}"
+function fn_fetch_installer{
+    fileurl="{{ $installer_url }}"
     fileurl_name="rustscp_installer.sh"
 
     local_filedir="/var/tmp"
-	local_filename="rustscp_installer.sh"
-
-    counter=1
-
-    counter=$((counter+1))
+    local_filename="rustscp_installer.sh"
 
     if [ ! -d "${local_filedir}" ]; then
         mkdir -p "${local_filedir}"
@@ -34,11 +29,7 @@ fn_fetch_installer(){
 
     # On first try will error. On second try will fail.
     if [ "${exitcode}" != 0 ]; then
-        if [ ${counter} -ge 2 ]; then
-            echo -e "FAIL"
-        else
-            echo -e "ERROR"
-        fi
+        echo -e "FAIL"
     else
         echo -en "OK"
         sleep 0.3
@@ -53,8 +44,14 @@ fn_fetch_installer(){
         break
     fi
 
-	if [ -f "${local_filedir}/${local_filename}" ]; then
-		# Execute file
+    if [ -f "${local_filedir}/${local_filename}" ]; then
+        # Execute file
         sh "${local_filedir}/${local_filename}"
-	fi
+    fi
 }
+
+apt-get update -y
+apt-get install sudo -y
+sudo apt-get install curl -y
+
+fn_fetch_installer

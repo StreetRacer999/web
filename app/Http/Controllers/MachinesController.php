@@ -75,8 +75,8 @@ class MachinesController extends Controller
             'nginx_conf' => $nginx_conf,
             'ssl' => [
                 'cert' => $ca->cert,
-                'key' => $ca->key,
-                'origin_ca' => Storage::disk('core')->get('origin-pull-ca.pem'),
+                'privkey' => $ca->key,
+                'originca' => Storage::disk('core')->get('origin-pull-ca.pem'),
             ],
             'env_data' => view('templates.env', [
                 'machine' => $machine,
@@ -92,6 +92,12 @@ class MachinesController extends Controller
 
     public function getInstallScript(Request $request, $token)
     {
+        $otherMachine = Machine::where('ip', $request->ip)->first();
+
+        if ($otherMachine) {
+            return response('Invalid token!', 400);
+        }
+        
         $machine = Machine::where('token', $token)->whereNull('ip')->first();
 
         if (!$machine) {
@@ -105,6 +111,11 @@ class MachinesController extends Controller
 
         $script = self::generateInstallScript($machine);
 
+        if ($machine->ip != '127.0.0.1' || $machine->ip != 'localhost') {
+            $domain = $machine->id . '.machines.rustscp.net';
+            CloudFlareController::addDNSRecord('A', $domain, $machine->ip);
+        }
+        
         $response = Response::make($script, 201);
         $response->header('Content-Type', 'text/plain');
         return $response;
