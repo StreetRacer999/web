@@ -92,12 +92,11 @@ class MachinesController extends Controller
 
     public function getInstallScript(Request $request, $token)
     {
-        $machine = Machine::where('token', $token)->first();
-        // $machine = Machine::where('token', $token)->whereNull('ip')->first();
+        $machine = Machine::where('token', $token)->whereNull('ip')->first();
 
-        // if (!$machine) {
-            // return response('Invalid token!', 400);
-        // }
+        if (!$machine) {
+            return response('Invalid token!', 400);
+        }
 
         $machine->ip = $request->ip();
         $machine->status = 'installing';
