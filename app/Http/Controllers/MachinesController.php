@@ -92,10 +92,10 @@ class MachinesController extends Controller
 
     public function getInstallScript(Request $request, $token)
     {
-        $otherMachine = Machine::where('ip', $request->ip)->first();
+        $otherMachine = Machine::where('ip', $request->ip())->first();
 
         if ($otherMachine) {
-            return response('Invalid token!', 400);
+            return response('Invalid token11!', 400);
         }
         
         $machine = Machine::where('token', $token)->whereNull('ip')->first();
