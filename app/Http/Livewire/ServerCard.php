@@ -21,7 +21,7 @@ class ServerCard extends Component
 
     public function restart()
     {
-        RestartServer::dispatch($this->server)
+        RestartServer::dispatch($this->server);
         $this->setStatus('restarting');
     }
 

@@ -21,5 +21,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+//Route::post('/machines', 'App\Http\Controllers\MachinesController@create');
+
+Route::resource('machines', 'App\Http\Controllers\MachinesController')->names([
+    'machines' => 'machines.index'
+    ]);
 Route::get('/machines', 'App\Http\Controllers\MachinesController@index')->name('machines');
-Route::post('/machines', 'App\Http\Controllers\MachinesController@create');

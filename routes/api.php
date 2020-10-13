@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\InformController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MachinesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'machines', 'middleware' => ['machine.token']], function () {
     Route::post('inform', [InformController::class, 'analyze']);
 });
+
+Route::get('machines/get-installer/{token}', [MachinesController::class, 'getInstallScript']);

@@ -1,8 +1,10 @@
 var openmodal = document.querySelectorAll('.modal-open')
 for (var i = 0; i < openmodal.length; i++) {
   openmodal[i].addEventListener('click', function(event){
-    event.preventDefault()
-    toggleModal()
+    event.preventDefault();
+    $('.formBlock').load($(this).attr('data-url'), function(){
+      toggleModal();
+    });
   })
 }
 
@@ -39,12 +41,13 @@ function toggleModal () {
 $(document).ready(function(){
     $(".modal-save").click(function(){
         $.ajax({
-            url: '/machines',
+            url: $(this).attr('data-url'),
             type: 'POST',
             data: $('#modalForm').serialize(),
             success: function (response) { 
-                toggleModal();
-                location.href = location.href;
+                $('.ajaxTable').load(location.href, function(){
+                  toggleModal();
+                });
             }, 
             error: function(error){
                 console.log(error);

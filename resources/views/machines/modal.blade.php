@@ -23,24 +23,14 @@
         </div>
 
         <!--Body-->
-        <form id="modalForm">
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                Name Machines
-            </label>
-            <input placeholder="Name Machines" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
-
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="ip">
-                IP
-            </label>
-            <input placeholder="IP" name="ip"  id="ip" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text">
-            {{ csrf_field() }}
+        <div class="mb-4 formBlock">
+          
         </div>
-        </form>
+       
         <!--Footer-->
         <div class="flex justify-end pt-2">
           <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
-          <button class="modal-save px-4 bg-green-500 p-3 rounded-lg text-white hover:bg-green-400">Save</button>
+          <button data-url="{{$urls['create']}}" class="modal-save px-4 bg-green-500 p-3 rounded-lg text-white hover:bg-green-400">Save</button>
         </div>
 
 

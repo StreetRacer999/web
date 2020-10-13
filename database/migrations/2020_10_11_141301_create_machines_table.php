@@ -20,7 +20,7 @@ class CreateMachinesTable extends Migration
             $table->string('name');
             $table->ipAddress('ip')->unique()->nullable();
             $table->string('token', 32)->unique();
-            $table->enum('status', ['online', 'offline', 'rebooting', 'installing', 'updating', 'unknown', 'error'])->default('installing')->index();
+            $table->enum('status', ['online', 'offline', 'rebooting', 'pending-install', 'installing', 'updating', 'unknown', 'error'])->default('pending-install')->index();
             $table->integer('max_servers')->nullable();
             $table->json('stats')->nullable();
             $table->json('specification')->nullable();
