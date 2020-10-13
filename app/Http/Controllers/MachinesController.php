@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Models\Machine;
 use Illuminate\Support\Str;
 
@@ -53,7 +54,7 @@ class MachinesController extends Controller
     public static function generateInstallPreparationScript($token)
     {
         $script = view('templates.prepare-install', [
-            'installer_url' => config('app.url') . '/api/get-installer/' . $token
+            'installer_url' => config('app.url') . '/api/machines/get-installer/' . $token
         ]);
 
         return $script;
@@ -91,11 +92,12 @@ class MachinesController extends Controller
 
     public function getInstallScript(Request $request, $token)
     {
-        $machine = Machine::where('token', $token)->whereNull('ip')->first();
+        $machine = Machine::where('token', $token)->first();
+        // $machine = Machine::where('token', $token)->whereNull('ip')->first();
 
-        if (!$machine) {
-            return response('Invalid token!', 400);
-        }
+        // if (!$machine) {
+            // return response('Invalid token!', 400);
+        // }
 
         $machine->ip = $request->ip();
         $machine->status = 'installing';

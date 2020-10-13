@@ -20,7 +20,7 @@ class CloudFlareController extends Controller
             'countryName' => 'RU',
             'emailAddress' => $email
         ];
-
+       
         $private_key = openssl_pkey_new(['private_key_type' => OPENSSL_KEYTYPE_RSA, 'private_key_bits' => 2048]);
         $csr_resource = openssl_csr_new($subject, $private_key, ['digest_alg' => 'sha256']);
 
