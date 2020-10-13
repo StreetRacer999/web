@@ -1,3 +1,4 @@
+#!/bin/bash
 fn_fetch_installer()
 
 fn_fetch_installer(){
