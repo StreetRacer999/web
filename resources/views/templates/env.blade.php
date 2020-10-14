@@ -1,8 +1,8 @@
-APP_NAME=Machine {{ $machine->id }}
+APP_NAME='Machine {{ $machine->id }}''
 APP_ENV=production
 APP_KEY={{ $key }}
 APP_DEBUG=false
-APP_URL="https://{{ $machine->id }}.machines.rustscp.net"
+APP_URL='https://{{ $machine->id }}.machines.rustscp.net'
 APP_TIMEZONE=UTC
 
 MACHINE_TOKEN={{ $machine->token }}
@@ -16,3 +16,5 @@ DB_DATABASE=/var/manager/web/database/db.sqlite
 
 CACHE_DRIVER=redis
 QUEUE_CONNECTION=redis
+
+DB_FOREIGN_KEYS=true

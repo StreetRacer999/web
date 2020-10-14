@@ -3,6 +3,10 @@
 sudo apt-get update
 sudo apt-get upgrade -y
 
+# Add repo with steamcmd
+sudo add-apt-repository multiverse
+sudo dpkg --add-architecture i386
+
 # Add PHP repo
 sudo apt-get install software-properties-common -y
 sudo add-apt-repository ppa:ondrej/php -y
@@ -12,7 +16,7 @@ sudo apt-get update
 sudo apt-get install systemd -y
 sudo apt-get install nginx redis-server -y
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get install unzip php7.4-fpm php7.4-common php7.4-bcmath openssl php7.4-json php7.4-xml php7.4-mbstring php7.4-zip php7.4-redis -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get install unzip php7.4-fpm php7.4-common php7.4-bcmath openssl php7.4-json php7.4-xml php7.4-mbstring php7.4-zip php7.4-redis php7.4-sqlite -y
 
 systemctl enable nginx php7.4-fpm
 systemctl start nginx php-7.4-fpm
@@ -47,11 +51,11 @@ git clone https://gitlab.domoratskiy.net/RustSCP/ServerManager.git web
 cd /var/manager/web
 
 touch .env
-echo "{{ $env_data }}" >> .env
+echo '{{ $env_data }}' >> .env
 touch database/db.sqlite
 
 composer install
-php artisan migrate
+echo "yes" | php artisan migrate
 
 chmod -R 755 /var/manager/web
 chmod -R 777 /var/manager/web/{bootstrap,storage}
