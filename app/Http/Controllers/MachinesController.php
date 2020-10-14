@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class MachinesController extends Controller
 {
     public function index(Request $request){
-        $machines = Machine::where('parent', \Auth::user()->id)->get();
+        $machines = Machine::where('team_id', \Auth::user()->currentTeam->id)->get();
 
         $data = [
             'title' => 'Наша компания',
@@ -46,7 +46,7 @@ class MachinesController extends Controller
         $machines->name = $request->input('name');
         $machines->status = 'pending-install';
         $machines->token = Str::random(32);
-        $machines->parent = \Auth::user()->id;
+        $machines->team_id = \Auth::user()->currentTeam->id ;
 
         $machines->save();
     }
